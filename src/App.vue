@@ -4,7 +4,7 @@ v-app#app(light)
     v-toolbar-title Invoice Maker
     v-spacer
     UploadButton
-    v-btn(color="success" v-if="invoice" disabled title="Feature not ready") Print
+    v-btn(color="success" v-if="invoice" title="Feature not ready" @click="printInvoice") Print
   v-container(v-if="invoice")
     InvoiceHeader(:totalCost="totalCost")
     InvoiceTable(:invoice="invoice" :totalCost="totalCost" :totalHours="totalHours")
@@ -22,6 +22,11 @@ export default {
     InvoiceTable
   },
   name: "app",
+  methods: {
+    printInvoice() {
+      window.print();
+    }
+  },
   watchers: {
     invoice() {
       return this.invoice;
@@ -42,6 +47,9 @@ export default {
 </script>
 
 <style>
+* {
+  font-variant-numeric: lining-nums;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +63,7 @@ export default {
     min-height: 100%;
   }
   .toolbar {
-    display: none;
+    display: none !important;
   }
   .container {
     margin-top: 0;
