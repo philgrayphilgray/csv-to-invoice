@@ -3,7 +3,8 @@ import Vue from "vue";
 
 import "./plugins/vuetify";
 import App from "./App.vue";
-import "./main.scss";
+
+import "./main.styl";
 import store from "./store";
 import dateFilter from "./filters/date";
 Vue.config.productionTip = false;
