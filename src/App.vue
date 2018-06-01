@@ -1,18 +1,18 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+#app
+  main
+    h1 VueJS DC Codelabs Project #1
+    UploadForm
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
 
+<script>
+import UploadForm from "./containers/UploadForm";
 export default {
-  name: "app",
   components: {
-    HelloWorld
-  }
+    UploadForm
+  },
+  name: "app"
 };
 </script>
 
