@@ -1,14 +1,11 @@
 <template lang="pug">
-v-layout(row wrap)
-    v-flex(xs-12)
-        v-card
-            v-container
-                v-form
-                    input.csv__input.--sr-only(type="file" accept=".csv" ref="fileInput" @change="onFileSelected")
-                    v-btn(raised @click="$refs.fileInput.click()" :loading="loading") Upload CSV
+div
+  input.csv__input.--sr-only(type="file" accept=".csv" ref="fileInput" @change="onFileSelected")
+  v-btn(raised @click="$refs.fileInput.click()" :loading="loading") Upload CSV
 </template>
 <script>
 import csvtojson from "../lib/csvtojson";
+import jsonToInvoiceData from "../lib/jsonToInvoiceData";
 export default {
   data() {
     return {
@@ -34,7 +31,8 @@ export default {
           const fileString = reader.result;
           try {
             const result = await csvtojson(fileString);
-            this.converted = result;
+            this.converted = jsonToInvoiceData(result);
+            this.$store.dispatch("setInvoice", this.converted);
             this.loading = false;
           } catch (error) {
             this.loading = false;

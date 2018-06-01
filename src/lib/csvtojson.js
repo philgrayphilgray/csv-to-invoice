@@ -1,9 +1,8 @@
-import request from "request";
 import csv from "csvtojson";
 
-export default async file => {
+export default async (file, options = { noheader: true }) => {
   try {
-    const jsonArray = await csv().fromString(file);
+    const jsonArray = await csv(options).fromString(file);
     // eslint-disable-next-line
     console.log(`success from the csvtojson helper: ${jsonArray}`);
     return jsonArray;

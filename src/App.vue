@@ -1,18 +1,40 @@
 <template lang="pug">
-#app
-  main
-    h1 VueJS DC Codelabs Project #1
-    UploadForm
+v-app#app(light)
+  v-toolbar(fixed)
+    v-toolbar-title Invoice Maker
+    v-spacer
+    UploadButton
+    v-btn(color="success" v-if="invoice" disabled title="Feature not ready") Print
+  v-container
+    InvoiceTable(v-if="invoice" :invoice="invoice" :totalCost="totalCost" :totalHours="totalHours")  
 </template>
 
 
 <script>
-import UploadForm from "./containers/UploadForm";
+import UploadButton from "@/components/UploadButton";
+import InvoiceTable from "@/components/InvoiceTable";
 export default {
   components: {
-    UploadForm
+    UploadButton,
+    InvoiceTable
   },
-  name: "app"
+  name: "app",
+  watchers: {
+    invoice() {
+      return this.invoice;
+    }
+  },
+  computed: {
+    invoice() {
+      return this.$store.getters.invoice;
+    },
+    totalHours() {
+      return Number(this.$store.getters.totalHours);
+    },
+    totalCost() {
+      return this.$store.getters.totalCost;
+    }
+  }
 };
 </script>
 
