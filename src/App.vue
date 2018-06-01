@@ -5,17 +5,20 @@ v-app#app(light)
     v-spacer
     UploadButton
     v-btn(color="success" v-if="invoice" disabled title="Feature not ready") Print
-  v-container
-    InvoiceTable(v-if="invoice" :invoice="invoice" :totalCost="totalCost" :totalHours="totalHours")  
+  v-container(v-if="invoice")
+    InvoiceHeader(:totalCost="totalCost")
+    InvoiceTable(:invoice="invoice" :totalCost="totalCost" :totalHours="totalHours")
 </template>
 
 
 <script>
 import UploadButton from "@/components/UploadButton";
+import InvoiceHeader from "@/components/InvoiceHeader";
 import InvoiceTable from "@/components/InvoiceTable";
 export default {
   components: {
     UploadButton,
+    InvoiceHeader,
     InvoiceTable
   },
   name: "app",
@@ -46,5 +49,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+@media print {
+  .application--wrap {
+    min-height: 100%;
+  }
+  .toolbar {
+    display: none;
+  }
+  .container {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 </style>
